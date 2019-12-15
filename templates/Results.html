@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        table{
+            width: 800px;
+            height: auto;
+        }
+        img{
+            width: 150px;
+            height: 200px;
+        }
+        body{
+            width: 800px;
+            margin-left: 25%;
+            margin-right: 25%;
+        }
+        h1{
+            margin-bottom: 20px;
+        }
+        h2{
+            margin-left: 20px;
+            font-size: 20px;
+            font-weight: normal;
+        }
+        h2 i{
+            font-weight: bold;
+        }
+        hr{
+            margin-bottom: 20px;
+        }
+        .block{
+            float: left;
+        }
+        #clear{
+            clear:both;
+        }
+    </style>
+</head>
+<body>
+    <h2>
+        <a href="http://127.0.0.1:5000/">Trang chủ</a>
+    </h2>
+    <h1 style="text-align: center">Kết quả tìm kiếm cho</h1>
+    <table id="query" style="margin-left: 20%">
+        <tr>
+            <td rowspan="2">
+                <img src="{{ url }}" style="margin-left: 30%">
+            </td>
+            <td>
+                <h2>Loại: {{ type }}</h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h2>Giới tính: {{ gender }}</h2>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <hr>
+    {% for result in results %}
+    <table>
+        <tr>
+            <td rowspan="3">
+                <img src="{{ url_for('static', filename=result.replace('static/','')) }}" style="margin-left: 10%">
+            </td>
+            <td>
+                <h2><i>Loại:</i> {{ id[result]['type'][0] }}</h2>
+            </td>
+            <td>
+                <h2><i>Giá:</i> {{ id[result]['price'][0] }}</h2>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <h2><i>Link:</i> {{ id[result]['web'][0] }}.com</h2>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <h2>{{ id[result]['content'][0] | safe }}</h2>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <hr>
+    {% endfor %}
+</body>
+</html>
